@@ -120,7 +120,7 @@ module Avo
           cache_and_return_error "HTTP connection reset error.", exception.message
         rescue Errno::ECONNREFUSED => exception
           cache_and_return_error "HTTP connection refused error.", exception.message
-        rescue HTTParty::Error => exception
+        rescue Faraday::Error => exception
           cache_and_return_error "HTTP client error.", exception.message
         rescue Net::OpenTimeout => exception
           cache_and_return_error "Request timeout.", exception.message
@@ -156,7 +156,7 @@ module Avo
       def perform_request
         ::Rails.logger.debug "[Avo] Performing request to avohq.io API to check license availability." if Rails.env.development?
 
-        HTTParty.post ENDPOINT, body: payload.to_json, headers: {'Content-type': "application/json"}, timeout: REQUEST_TIMEOUT
+        Faraday.post ENDPOINT, body: payload.to_json, headers: {'Content-type': "application/json"}, timeout: REQUEST_TIMEOUT
       end
 
       def app_name

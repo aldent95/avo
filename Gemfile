@@ -113,7 +113,7 @@ gem "rubocop-shopify", require: false
 
 gem "zeitwerk", "~> 2.3"
 
-gem "httparty"
+gem "faraday"
 
 gem "iso"
 
